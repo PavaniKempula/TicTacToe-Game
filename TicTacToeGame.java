@@ -22,11 +22,13 @@ public class TicTacToeGame {
 		boardCreation();
 		// for user to choose 'X' or 'O' mark
 		choosingXorO();
+		// for display the current board
+		currentBoard();
 	}
-	
+
 	/*
-	 * creating elements with null
-	 * 0th index ignored for user friendly
+	 * creating elements with null 0th index ignored for user friendly
+	 * 
 	 * @param element
 	 */
 	private static void boardCreation() {
@@ -38,10 +40,12 @@ public class TicTacToeGame {
 
 	/*
 	 * Asking user to choose X or O
+	 * 
 	 * @param option
+	 * 
 	 * @return userMark, computerMark
 	 */
-	
+
 	private static void choosingXorO() {
 		System.out.println("Choose 1 for 'X' or Choose 2 for 'O' as your mark");
 		int option = scan.nextInt();
@@ -58,5 +62,30 @@ public class TicTacToeGame {
 			System.out.println("Your input is invalid");
 			choosingXorO();
 		}
+	}
+
+	/*
+	 * Assignment element with number if it is not marked
+	 * 
+	 * @param element[]
+	 */
+	private static void currentBoard() {
+		for (int i = 1; i < 10; i++) {
+			if (element[i] != 'X' && element[i] != 'O') {
+				element[i] = (char) (i + '0');
+			}
+		}
+		displayingBoard();
+	}
+
+	/*
+	 * Displays board layout Elements are assigned with marks and numbers
+	 */
+	private static void displayingBoard() {
+		System.out.println("\n  " + element[1] + " | " + element[2] + " | " + element[3] + " ");
+		System.out.println(" ----------- ");
+		System.out.println("  " + element[4] + " | " + element[5] + " | " + element[6] + " ");
+		System.out.println(" ----------- ");
+		System.out.println("  " + element[7] + " | " + element[8] + " | " + element[9] + " \n");
 	}
 }
