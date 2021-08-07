@@ -31,7 +31,8 @@ public class TicTacToeGame {
 		// For making toss to check who plays first
 		tossCoin();
 		// to play the game until some one wins i.e. flag=1
-		outerloop: while (flag == 0) {
+		outerloop:
+		while (flag == 0) {
 			if ((turn + 1) % 2 == 0) {
 				// for display the current board
 				currentBoard();
@@ -60,6 +61,12 @@ public class TicTacToeGame {
 				flag = computerWin();
 				if (flag == 1)
 					break outerloop;
+				flag = computerBlock();
+				if (flag == 1) {
+					turn++;
+					flag = 0;
+					return;
+				}
 			}
 		}
 	}
@@ -103,7 +110,8 @@ public class TicTacToeGame {
 	}
 
 	/*
-	 * Displays board layout Elements are assigned with marks and numbers
+	 * Displays board layout
+	 * Elements are assigned with marks and numbers
 	 */
 	private static void displayingBoard() {
 		System.out.println("\n  " + element[1] + " | " + element[2] + " | " + element[3] + " ");
@@ -128,8 +136,8 @@ public class TicTacToeGame {
 	}
 
 	/**
-	 * Checking whether the user number is free or not
-	 * If user number is available, making the move
+	 * Checking whether the user number is free or not If user number is available,
+	 * making the move
 	 */
 	private static void userMove() {
 		if (element[userNumber] == 'X' || element[userNumber] == 'O') {
@@ -282,4 +290,20 @@ public class TicTacToeGame {
 		}
 		return flag;
 	}
+
+	/**
+	 * making User block from winning
+	 * 
+	 * @return flag
+	 */
+	private static int computerBlock() {
+		int index = winBlock(userMark, computerMark);
+		if (index != 0) {
+			element[index] = computerMark;
+			System.out.println("Computer goes for '" + index + "' to block User");
+			flag = 1;
+		}
+		return flag;
+	}
+
 }
