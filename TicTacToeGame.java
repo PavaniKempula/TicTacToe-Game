@@ -31,7 +31,7 @@ public class TicTacToeGame {
 		// For making toss to check who plays first
 		tossCoin();
 		// to play the game until some one wins i.e. flag=1
-		outerloop:
+		outerloop: 
 		while (flag == 0) {
 			if ((turn + 1) % 2 == 0) {
 				// for display the current board
@@ -62,6 +62,12 @@ public class TicTacToeGame {
 				if (flag == 1)
 					break outerloop;
 				flag = computerBlock();
+				if (flag == 1) {
+					turn++;
+					flag = 0;
+					return;
+				}
+				flag = computerCorner();
 				if (flag == 1) {
 					turn++;
 					flag = 0;
@@ -110,8 +116,7 @@ public class TicTacToeGame {
 	}
 
 	/*
-	 * Displays board layout
-	 * Elements are assigned with marks and numbers
+	 * Displays board layout Elements are assigned with marks and numbers
 	 */
 	private static void displayingBoard() {
 		System.out.println("\n  " + element[1] + " | " + element[2] + " | " + element[3] + " ");
@@ -136,8 +141,8 @@ public class TicTacToeGame {
 	}
 
 	/**
-	 * Checking whether the user number is free or not If user number is available,
-	 * making the move
+	 * Checking whether the user number is free or not
+	 * If user number is available, making the move
 	 */
 	private static void userMove() {
 		if (element[userNumber] == 'X' || element[userNumber] == 'O') {
@@ -190,9 +195,8 @@ public class TicTacToeGame {
 	}
 
 	/**
-	 * Checking either user is winning or not Calling winArray method for winning
-	 * choices
-	 * 
+	 * Checking either user is winning or not Calling winArray method for winning choices
+	 *
 	 * @param win[]
 	 */
 	public static int checkWin() {
@@ -306,4 +310,21 @@ public class TicTacToeGame {
 		return flag;
 	}
 
+	/**
+	 * Making computer to choose corner
+	 * 
+	 * @return flag
+	 */
+	private static int computerCorner() {
+		int corner[] = { 7, 3, 1, 9 };
+		for (int i = 0; i < 4; i++) {
+			if (element[corner[i]] != 'X' && element[corner[i]] != 'O') {
+				element[corner[i]] = computerMark;
+				System.out.println("Computer choice is '" + corner[i] + "'");
+				flag = 1;
+				break;
+			}
+		}
+		return flag;
+	}
 }
