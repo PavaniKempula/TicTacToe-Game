@@ -31,8 +31,7 @@ public class TicTacToeGame {
 		// For making toss to check who plays first
 		tossCoin();
 		// to play the game until some one wins i.e. flag=1
-		outerloop: 
-		while (flag == 0) {
+		outerloop: while (flag == 0) {
 			if ((turn + 1) % 2 == 0) {
 				// for display the current board
 				currentBoard();
@@ -56,6 +55,11 @@ public class TicTacToeGame {
 					break outerloop;
 				}
 				turn++;
+			} else {
+				// To check whether computer is winning or not
+				flag = computerWin();
+				if (flag == 1)
+					break outerloop;
 			}
 		}
 	}
@@ -124,7 +128,7 @@ public class TicTacToeGame {
 	}
 
 	/**
-	 * Checking whether the user number is free or not 
+	 * Checking whether the user number is free or not
 	 * If user number is available, making the move
 	 */
 	private static void userMove() {
@@ -174,11 +178,12 @@ public class TicTacToeGame {
 	public static void computerFirstTurn() {
 		computerNumber = random.nextInt(9) + 1;
 		element[computerNumber] = computerMark;
-		System.out.println("Computer chooses '" + computerNumber + "' now user turn");
+		System.out.println("Computer choses '" + computerNumber + "' now user turn");
 	}
 
 	/**
-	 * Checking either user is winning or not Calling winArray method for winning choices
+	 * Checking either user is winning or not Calling winArray method for winning
+	 * choices
 	 * 
 	 * @param win[]
 	 */
@@ -226,7 +231,9 @@ public class TicTacToeGame {
 		}
 	}
 
-	// Checking either game is tie or not
+	/**
+	 * Checking either game is tie or not
+	 */
 	public static int checkTie() {
 		for (int i = 1; i < 10; i++) {
 			if (element[i] == 'X' || element[i] == 'O') {
@@ -234,6 +241,44 @@ public class TicTacToeGame {
 					flag = 1;
 				}
 			}
+		}
+		return flag;
+	}
+
+	/**
+	 * checks for in winning pattern any of 2 cells are same and other is empty
+	 * 
+	 * @param playerMark, opponentMark
+	 * @return flag
+	 */
+	private static int winBlock(char playerMark, char opponentMark) {
+		int winBlock[] = new int[3];
+		for (int i = 1; i < 9; i++) {
+			winBlock = winArray(i);
+		}
+		if (element[winBlock[0]] == element[winBlock[1]] && element[winBlock[0]] == playerMark && element[winBlock[2]] != opponentMark) {
+			flag = winBlock[2];
+		} else if (element[winBlock[0]] == element[winBlock[2]] && element[winBlock[2]] == playerMark && element[winBlock[1]] != opponentMark) {
+			flag = winBlock[1];
+		} else if (element[winBlock[1]] == element[winBlock[2]] && element[winBlock[2]] == playerMark && element[winBlock[0]] != opponentMark) {
+			flag = winBlock[0];
+		}
+		return flag;
+	}
+
+	/**
+	 * Checking for computer win
+	 * 
+	 * @return flag
+	 */
+	private static int computerWin() {
+		int index = winBlock(computerMark, userMark);
+		if (index != 0) {
+			element[index] = computerMark;
+			System.out.println("My choice is '" + index + "'");
+			currentBoard();
+			System.out.println("I won. Better Luck next time");
+			flag = 1;
 		}
 		return flag;
 	}
