@@ -31,7 +31,7 @@ public class TicTacToeGame {
 		// For making toss to check who plays first
 		tossCoin();
 		// to play the game until some one wins i.e. flag=1
-		outerloop: 
+		outerloop:
 		while (flag == 0) {
 			if ((turn + 1) % 2 == 0) {
 				// for display the current board
@@ -68,6 +68,12 @@ public class TicTacToeGame {
 					return;
 				}
 				flag = computerCorner();
+				if (flag == 1) {
+					turn++;
+					flag = 0;
+					return;
+				}
+				flag = computerCenterSide();
 				if (flag == 1) {
 					turn++;
 					flag = 0;
@@ -116,7 +122,8 @@ public class TicTacToeGame {
 	}
 
 	/*
-	 * Displays board layout Elements are assigned with marks and numbers
+	 * Displays board layout 
+	 * Elements are assigned with marks and numbers
 	 */
 	private static void displayingBoard() {
 		System.out.println("\n  " + element[1] + " | " + element[2] + " | " + element[3] + " ");
@@ -141,8 +148,8 @@ public class TicTacToeGame {
 	}
 
 	/**
-	 * Checking whether the user number is free or not
-	 * If user number is available, making the move
+	 * Checking whether the user number is free or not If user number is available,
+	 * making the move
 	 */
 	private static void userMove() {
 		if (element[userNumber] == 'X' || element[userNumber] == 'O') {
@@ -195,8 +202,9 @@ public class TicTacToeGame {
 	}
 
 	/**
-	 * Checking either user is winning or not Calling winArray method for winning choices
-	 *
+	 * Checking either user is winning or not Calling winArray method for winning
+	 * choices
+	 * 
 	 * @param win[]
 	 */
 	public static int checkWin() {
@@ -323,6 +331,30 @@ public class TicTacToeGame {
 				System.out.println("Computer choice is '" + corner[i] + "'");
 				flag = 1;
 				break;
+			}
+		}
+		return flag;
+	}
+
+	/**
+	 * Making computer to choose center and then side
+	 * 
+	 * @return flag
+	 */
+	private static int computerCenterSide() {
+		if (element[5] != 'X' && element[5] != 'O') {
+			element[5] = computerMark;
+			System.out.println("Computer choice is '5'");
+			flag = 1;
+		} else {
+			int side[] = { 2, 6, 8, 4 };
+			for (int j = 0; j < 4; j++) {
+				if (element[side[j]] != 'X' && element[side[j]] != 'O') {
+					element[side[j]] = computerMark;
+					System.out.println("My choice is '" + side[j] + "'");
+					flag = 1;
+					break;
+				}
 			}
 		}
 		return flag;
