@@ -25,8 +25,10 @@ public class TicTacToeGame {
 		choosingXorO();
 		// for display the current board
 		currentBoard();
-		//for calling the user for number
+		// for calling the user for number
 		userCall();
+		// for making the mark on user number
+		userMove();
 	}
 
 	/*
@@ -92,7 +94,7 @@ public class TicTacToeGame {
 		System.out.println(" ----------- ");
 		System.out.println("  " + element[7] + " | " + element[8] + " | " + element[9] + " \n");
 	}
-	
+
 	/*
 	 * Asking user for a number and checks whether the number is with in the board
 	 * userNumber
@@ -104,6 +106,22 @@ public class TicTacToeGame {
 			currentBoard();
 			System.out.println("Your input is Invalid");
 			userCall();
+		}
+	}
+
+	/*
+	 * Checking whether the user number is free or not 
+	 * If user number is available, making the move
+	 */
+	private static void userMove() {
+		if (element[userNumber] == 'X' || element[userNumber] == 'O') {
+			currentBoard();
+			System.out.println("Number which is selected is not free");
+			userCall();
+			userMove();
+		} else {
+			element[userNumber] = userMark;
+			System.out.println(userMark + " user is marked " + userNumber);
 		}
 	}
 }
