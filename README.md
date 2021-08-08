@@ -28,13 +28,11 @@ So...Let’s get started!
 ## Here is the preview of the game :
 
 **Welcome to TicTacToe Game**
-
-   |  |  
-----------
-   |  |   
-----------
-   |  |   
-   
+ 
+ 1 2 3 
+ 4 5 6 
+ 7 8 9 
+ 
 Select your mark
 
 Choose '1' for X
@@ -52,44 +50,37 @@ By tossing Coin it shows TAIL
 
 Computer will start the game
 Computer choice is '7'
-
-  1 | 2 | 3
- -----------
-  4 | 5 | 6 
- -----------  
-  O | 8 | 9 
-
+ 
+ 1 2 3
+ 4 5 6
+ O 8 9
+ 
 Enter a number from board to make the mark:
 5
 You choose number 5
 Computer choice is '3'
-
-  1 | 2 | O
- -----------
-  4 | X | 6 
- -----------
-  O | 8 | 9 
+ 
+ 1 2 O
+ 4 X 6
+ O 8 9
   
 Enter a number from board to make the mark:
 8
 You choose number 8
 Computer goes for '2' to block you
-
-  1 | O | O
- -----------  
-  4 | X | 6 
- -----------
-  O | X | 9
+  
+ 1 O O 
+ 4 X 6
+ O X 9
+ 
 Enter a number from board to make the mark:
 1
 You choose number 1
 Computer goes for '9' to block you
-
-  X | O | O 
- -----------
-  4 | X | 6 
- -----------
-  O | X | O
+ 
+ X O O 
+ 4 X 6
+ O X O 
  
 Enter a number from board to make the mark:
 6
